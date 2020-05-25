@@ -1,0 +1,77 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             BindingContext="{Binding Main, Source={StaticResource Locator}}"
+             Title="ListProducts"
+             x:Class="AppProducto.Views.ListProductView">
+    <ContentPage.Content>
+        <StackLayout Padding="10,30,10,10" Spacing="10" 
+                     BindingContext="{Binding ListProducts}">
+            <Label x:Name="titleLabel"
+                   Font="30"
+                   HorizontalOptions="Center"
+                   VerticalOptions="Center"/>
+            <StackLayout Orientation="Horizontal">
+                <Button x:Name="newButton"
+                        Text="Nuevo"
+                        BackgroundColor="Navy"
+                        TextColor="White"
+                        HorizontalOptions="FillAndExpand"
+                        VerticalOptions="Center"/>
+                <Button x:Name="findButton"
+                        Text="Buscar"
+                        BackgroundColor="Yellow"
+                        TextColor="Black"
+                        HorizontalOptions="FillAndExpand"
+                        VerticalOptions="Center"/>
+            </StackLayout>
+            <ListView x:Name="productsListView"
+                      BackgroundColor="White"
+                      HasUnevenRows="True"
+                      IsPullToRefreshEnabled="True"
+                      IsRefreshing="{Binding IsRefreshing, Mode=TwoWay}"
+                      ItemsSource="{Binding ListProducts}"
+                      SeparatorVisibility="None"
+                      RefreshCommand="{Binding RefreshCommand}"
+                      HorizontalOptions="FillAndExpand"
+                      VerticalOptions="FillAndExpand">
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <ViewCell>
+                            <Frame
+                                CornerRadius="20"
+                                HasShadow="True"
+                                Margin="5">
+                                <Grid>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="*"/>
+                                    </Grid.ColumnDefinitions>
+                                    <StackLayout
+                                        Grid.Column="0"
+                                        VerticalOptions="Center">
+                                        <Label
+                                            Text="{Binding ProductId}"
+                                            TextColor="Black">
+                                        </Label>
+                                        <Label
+                                            FontAttributes="Bold"
+                                            Text="{Binding Name}"
+                                            TextColor="Black">
+                                        </Label>
+                                        <Label
+                                            FontAttributes="Bold"
+                                            Text="{Binding Value}"
+                                            TextColor="Black">
+                                        </Label>
+                                    </StackLayout>
+                                </Grid>
+                            </Frame>
+                        </ViewCell>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>
